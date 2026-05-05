@@ -8,7 +8,7 @@ Option 1: Transliteration Accuracy Testing for Chat Sinhala / Singlish to Sinhal
 
 ## Files Included
 - `test_automation/IT23687882_test_automation.py` - Playwright automation script.
-- `test_automation/IT23687882_Assignment 1 - Test cases.xlsx` - Completed test case Excel file with 50 negative test cases.
+- `test_automation/IT23687882_Assignment 1 - Test cases_FIXED.xlsx` - Completed test case Excel file with 50 negative test cases.
 - `requirements.txt` - Python package requirements.
 - `run_tests_IT23687882.bat` - Windows quick-run command.
 - `Git Repository Link - IT23687882.txt` - Add the public GitHub repository URL here before submission.
@@ -32,7 +32,7 @@ playwright install
 From the root folder, run:
 
 ```bash
-python test_automation/IT23687882_test_automation.py --excel "test_automation/IT23687882_Assignment 1 - Test cases.xlsx" --url "https://www.pixelssuite.com/chat-translator" --wait-ms 5000 --type-delay-ms 80 --slow-mo-ms 200 --save-every 1 --keep-open
+python test_automation/IT23687882_test_automation.py --excel "test_automation/IT23687882_Assignment 1 - Test cases_FIXED.xlsx" --url "https://www.pixelssuite.com/chat-translator" --wait-ms 5000 --type-delay-ms 80 --slow-mo-ms 200 --save-every 1 --keep-open
 ```
 
 Or double-click:

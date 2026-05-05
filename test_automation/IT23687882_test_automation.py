@@ -14,6 +14,8 @@ PROJECT_DIR = SCRIPT_DIR.parent
 TESTS_DIR = SCRIPT_DIR if SCRIPT_DIR.name.lower() == "test_automation" else (PROJECT_DIR / "test_automation")
 
 DEFAULT_EXCEL_CANDIDATES = [
+    str(TESTS_DIR / "IT23687882_Assignment 1 - Test cases_FIXED.xlsx"),
+    str(SCRIPT_DIR / "IT23687882_Assignment 1 - Test cases_FIXED.xlsx"),
     str(TESTS_DIR / "Assignment 1 - Test cases.xlsx"),
     str(TESTS_DIR / "IT23687882_Assignment 1 - Test cases.xlsx"),
     str(SCRIPT_DIR / "Assignment 1 - Test cases.xlsx"),
@@ -75,17 +77,18 @@ def _pick_existing_path(candidates):
             return p
     return candidates[0] if candidates else None
 
-def _resolve_path(p: str | None) -> str | None:
+def _resolve_path(p: str | None, must_exist: bool = True) -> str | None:
     if not p:
         return None
     path = Path(p)
     if path.is_absolute():
         return str(path)
-    for base in (SCRIPT_DIR, TESTS_DIR, PROJECT_DIR):
+
+    for base in (PROJECT_DIR, TESTS_DIR, SCRIPT_DIR):
         candidate = (base / path).resolve()
-        if candidate.exists():
+        if not must_exist or candidate.exists():
             return str(candidate)
-    return str((SCRIPT_DIR / path).resolve())
+    return str((PROJECT_DIR / path).resolve())
 
 def _normalize_header(value) -> str:
     if value is None:
@@ -433,8 +436,8 @@ def _parse_args():
 def run_test():
     _configure_stdout()
     args = _parse_args()
-    args.excel = _resolve_path(args.excel)
-    args.output = _resolve_path(args.output) if args.output else args.excel
+    args.excel = _resolve_path(args.excel, must_exist=True)
+    args.output = _resolve_path(args.output, must_exist=False) if args.output else args.excel
 
     if not args.excel or not os.path.exists(args.excel):
         print(f"Error: File '{args.excel}' not found.")
