@@ -1,0 +1,4 @@
+@echo off
+cd /d "%~dp0"
+python test_automation\IT23687882_test_automation.py --excel "test_automation/IT23687882_Assignment 1 - Test cases.xlsx" --url "https://www.pixelssuite.com/chat-translator" --wait-ms 5000 --type-delay-ms 80 --slow-mo-ms 200 --save-every 1 --keep-open
+pause
